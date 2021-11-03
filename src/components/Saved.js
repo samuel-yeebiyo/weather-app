@@ -2,15 +2,15 @@ import '../css/saved.css'
 
 import Card from './Card'
 
-const Saved = () => {
+const Saved = ({save, favs}) => {
     return (
         <div className="Saved">
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
+            {favs.length > 0 ? 
+                favs.map((item)=>(
+                    <Card city={item} save={save}/>
+                )) :
+                <p>No saved locations</p>
+            }
         </div>
     )
 }

@@ -1,0 +1,21 @@
+.Item{
+    width:100%;
+    height:60px;
+    background:white;
+    border-radius:10px;
+    margin-bottom:20px;
+    padding:15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: #0000 10px;
+}
+.Item span{
+    color:black;
+}
+.Item p{
+    cursor: pointer;
+}
+.Item img{
+    max-height:25px;
+}

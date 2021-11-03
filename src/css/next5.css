@@ -1,0 +1,41 @@
+.Next5{
+    width:85%;
+    margin:0 auto 0 auto;
+    height:200px;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.next-block{
+    width:20%;
+    height:100%;
+}
+.next-block{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.next-block p{
+    font-size:22px;
+    margin-bottom:25px;
+}
+.next-temp{
+    position:relative;
+    margin-bottom:35px;
+}
+.next-num{
+    font-size:50px;
+}
+.next-degree{
+    height:16px;
+    width:16px;
+    border:4px solid white;
+    border-radius: 50%;
+    position:absolute;
+    top:5px;
+}
+.divider{
+    border:1px solid white;
+    height:15%;
+}

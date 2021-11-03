@@ -4,6 +4,7 @@
     display:flex;
     flex-direction: column;
     color:white;
+    justify-content: space-between;
 }
 .current{
     width:80%;
@@ -14,11 +15,21 @@
     margin-top:50px;
 }
 .location{
+    margin-bottom:10px;
+    display: flex;
+    align-items: center;
+}
+.current-city{
     font-size:70px;
-    margin-bottom:30px;
+    margin-right:10px;
 }
 .code{
     font-size:50px;
+    align-self: flex-end;
+}
+.current-star img{
+    margin-top:10px;
+    max-height:40px;
 }
 .weather-icon{
     height:144px;
@@ -27,7 +38,7 @@
 }
 .weather-description{
     font-size:25px;
-    margin-bottom:30px;
+    margin-bottom:20px;
 }
 .current-temp{
     position:relative;
@@ -45,7 +56,7 @@
 }
 .apparent-temp{
     position:relative;
-    margin-bottom:30px;
+    margin-bottom:35px;
 }
 .app-num{
     font-size:50px;
@@ -66,8 +77,74 @@
     flex-direction: column;
     align-items: center;
     width:150px;
+    position:relative;
 }
 .meta-item img{
     height:30px;
-    width:30px;
+    margin-bottom:15px;
+}
+.hum::after{
+    content:"Humidity";
+    position:relative;
+    bottom:-10px;
+    background-color: rgb(223, 223, 223);
+    padding:5px;
+    border-radius:5px;
+    color:black;
+    font-size:13px;
+    visibility:hidden;
+}
+.hum::before{
+    content:"";
+    position:absolute;
+    bottom:14px;
+    margin-left: -5px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent  transparent rgb(223, 223, 223) transparent ;
+    visibility:hidden;
+}
+.pres::after{
+    content:"Pressure";
+    position:relative;
+    bottom:-10px;
+    background-color: rgb(223, 223, 223);
+    padding:5px;
+    border-radius:5px;
+    color:black;
+    font-size:13px;
+    visibility:hidden;
+}
+.pres::before{
+    content:"";
+    position:absolute;
+    bottom:14px;
+    margin-left: -5px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent  transparent rgb(223, 223, 223) transparent ;
+    visibility:hidden;
+}
+.spd::after{
+    content:"Wind Speed";
+    position:relative;
+    bottom:-10px;
+    background-color: rgb(223, 223, 223);
+    padding:5px;
+    border-radius:5px;
+    color:black;
+    font-size:13px;
+    visibility:hidden;
+}
+.spd::before{
+    content:"";
+    position:absolute;
+    bottom:14px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent  transparent rgb(223, 223, 223) transparent ;
+    visibility:hidden;
+}
+.meta-item:hover::after, .meta-item:hover::before{
+    visibility: visible;
 }

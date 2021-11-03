@@ -1,7 +1,32 @@
 .Search{
-    width:85%;
+    width:80%;
     display:flex;
     flex-direction:column;
     padding-top:40px;
     margin:auto;
+    max-width:400px;
+}
+.search-bar{
+    height:30px;
+    display: flex;
+}
+.search-bar img{
+    height:100%;
+    margin-right:10px;
+}
+input[type='text']{
+    width:80%;
+    background:none;
+    box-shadow: none;
+    border:none;
+    border-bottom: 2px solid rgb(148, 148, 148);
+    color:white;
+    font-size: 21px;
+    padding:0 0 5px 5px;
+    transition:border-color 0.3s ease-in;
+}
+input[type='text']:focus{
+    transition:border-color 0.3s ease-in;
+    border-color: white;
+    outline:none
 }
