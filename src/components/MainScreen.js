@@ -9,7 +9,7 @@ import notFaved from '../assets/empty-star.png'
 
 import Next5 from './Next5'
 
-const MainScreen = ({save, favs, current}) => {
+const MainScreen = ({save, favs, current, weather}) => {
 
     //From api
     /*
@@ -30,38 +30,43 @@ const MainScreen = ({save, favs, current}) => {
         <div className="Main">
             <div className="current">
                 <div className="location">
-                    <p className="current-city"> {current.city_name},   <span className="code"> {current.country_code}</span></p>
+                    <p className="current-city"> {current.city_name || "- -"},   <span className="code"> {current.country_code || "- -"}</span></p>
                     <div className="current-star" onClick={()=>{
-                        save(current)
+                        if(Object.keys(current).length !== 0){
+                            save(current)
+                        }
                     }}>{
                         favs.some(item => item.city_id == current.city_id) ?
                         <img src={faved} /> : <img src={notFaved}/>
                     }</div>
                 </div>
-                <img className="weather-icon" src=""/>
-                <p className="weather-description">Scattered Clouds</p>
+                {Object.keys(weather.data[0].weather).length !== 0 ?
+                    <img className="weather-icon" src={process.env.PUBLIC_URL+ `/icons/${weather.data[0].weather.icon}.png`}/> :
+                    <img className="weather-icon" src=""/>
+                }
+                <p className="weather-description">{weather.data[0].weather.description || "- -"}</p>
                 <div className="current-temp">
-                    <span className="cur-num">-4</span><span className="cur-degree"></span>
+                    <span className="cur-num">{weather.data[0].temp || "- -"}</span><span className="cur-degree"></span>
                 </div>
                 <div className="apparent-temp">
-                    <span className="app-num">-4</span><span className="app-degree"></span>
+                    <span className="app-num">{(weather.data[0].app_min_temp + weather.data[0].app_max_temp)/2|| "- -"}</span><span className="app-degree"></span>
                 </div>
                 <div className="meta">
                     <div className="meta-item hum">
                         <img src={Humidity}/>
-                        <p>20%</p>
+                        <p>{weather.data[0].rh || "- -"}  %</p>
                     </div>
                     <div className="meta-item pres">
                         <img src={Bar}/>
-                        <p>1000 mb</p>
+                        <p>{weather.data[0].pres || "- -"}  mb</p>
                     </div>
                     <div className="meta-item spd">
                         <img src={WinSpeed}/>
-                        <p>900 m/s</p>
+                        <p>{weather.data[0].wind_spd || "- -"}  m/s</p>
                     </div>
                 </div>
             </div>
-            <Next5/>
+            <Next5 weather={weather}/>
         </div>
     )
 }

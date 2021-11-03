@@ -9,25 +9,60 @@ import {useMediaQuery} from 'react-responsive'
 import MainScreen from './components/MainScreen'
 import SideBar from './components/SideBar'
 import Menu from './components/Menu'
+import {cities} from './data/cities'
 
 function App() {
 
   const [option, setOption] = useState(0)
   const [saved, setSaved] = useState([]);
-  const [current, setCurrent] = useState({
-    "city_id": 735563,
-    "city_name": "Kozáni",
-    "state_code": "ESYE13",
-    "country_code": "GR",
-    "country_full": "Piraiós Nomós",
-    "lat": 40.30069,
-    "lon": 21.78896
-  },);
-  const [weather, setWeather] = useState({})
+  const [current, setCurrent] = useState({});
+  const [weather, setWeather] = useState({
+    data: [
+      {weather: {}},
+      {weather: {}},
+      {weather: {}},
+      {weather: {}},
+      {weather: {}},
+      {weather: {}},
+    ]
+  })
 
   useEffect(()=>{
 
-    console.log("Current location weather fetched!");
+    navigator.geolocation.getCurrentPosition((position)=>{
+
+      let lat = position.coords.latitude
+      let lon = position.coords.longitude
+      
+      let options = {
+        method: 'GET',
+        url: 'https://weatherbit-v1-mashape.p.rapidapi.com/forecast/daily',
+        params: {lat: `${lat}`, lon: `${lon}`},
+        headers: {
+          'x-rapidapi-host': 'weatherbit-v1-mashape.p.rapidapi.com',
+          'x-rapidapi-key': process.env.REACT_APP_API_KEY
+        }
+      };
+
+
+      axios.request(options).then(function (response) {
+        let fetched = response.data;
+        console.log(fetched)
+        setWeather(response.data);
+
+        for(let i=0; i<cities.length ; i++){
+          if(fetched.city_name == cities[i].city_name && fetched.state_code == cities[i].state_code){
+            setCurrent(cities[i]);
+            break;
+          }
+        }
+
+      }).catch(function (error) {
+        console.error(error);
+      });
+
+      
+    })
 
 
   },[])
@@ -60,6 +95,23 @@ function App() {
 
   const currentWeather = (city) =>{
     setCurrent(city)
+
+    let options = {
+      method: 'GET',
+      url: 'https://weatherbit-v1-mashape.p.rapidapi.com/forecast/daily',
+      params: {lat: `${city.lat}`, lon: `${city.lon}`},
+      headers: {
+        'x-rapidapi-host': 'weatherbit-v1-mashape.p.rapidapi.com',
+        'x-rapidapi-key': process.env.REACT_APP_API_KEY
+      }
+    };
+
+    axios.request(options).then(function (response) {
+      console.log(response.data)
+      setWeather(response.data);
+    }).catch(function (error) {
+      console.error(error);
+    });
   }
 
   const isMobile = useMediaQuery({query: '(max-width: 760px'});
@@ -74,7 +126,7 @@ function App() {
         <Menu change={change}/>
         <SideBar option={option} save={save} favs={saved} setCurrent={currentWeather}/>
       </div>
-      <MainScreen save={save} favs={saved} current={current}/>
+      <MainScreen save={save} favs={saved} current={current} weather={weather}/>
     </div>
   );
 }
