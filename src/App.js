@@ -16,6 +16,11 @@ function App() {
   const [option, setOption] = useState(0)
   const [saved, setSaved] = useState([]);
   const [current, setCurrent] = useState({});
+  const [now, setNow] = useState({
+    data:[{
+      weather:{}
+    }]
+  })
   const [weather, setWeather] = useState({
     data: [
       {weather: {}},
@@ -28,6 +33,7 @@ function App() {
   })
 
   useEffect(()=>{
+    console.log(cities.length)
 
     navigator.geolocation.getCurrentPosition((position)=>{
 
@@ -56,6 +62,25 @@ function App() {
             break;
           }
         }
+
+      }).catch(function (error) {
+        console.error(error);
+      });
+
+      options = {
+        method: 'GET',
+        url: 'https://weatherbit-v1-mashape.p.rapidapi.com/current',
+        params: {lat: `${lat}`, lon: `${lon}`},
+        headers: {
+          'x-rapidapi-host': 'weatherbit-v1-mashape.p.rapidapi.com',
+          'x-rapidapi-key': process.env.REACT_APP_API_KEY
+        }
+      };
+
+      axios.request(options).then(function (response) {
+        let fetched = response.data;
+        console.log(fetched)
+        setNow(response.data);
 
       }).catch(function (error) {
         console.error(error);
@@ -112,6 +137,26 @@ function App() {
     }).catch(function (error) {
       console.error(error);
     });
+
+    options = {
+      method: 'GET',
+      url: 'https://weatherbit-v1-mashape.p.rapidapi.com/current',
+      params: {lat: `${city.lat}`, lon: `${city.lon}`},
+      headers: {
+        'x-rapidapi-host': 'weatherbit-v1-mashape.p.rapidapi.com',
+        'x-rapidapi-key': process.env.REACT_APP_API_KEY
+      }
+    };
+
+    axios.request(options).then(function (response) {
+      let fetched = response.data;
+      console.log(fetched)
+      setNow(response.data);
+
+    }).catch(function (error) {
+      console.error(error);
+    });
+
   }
 
   const isMobile = useMediaQuery({query: '(max-width: 760px'});
@@ -124,9 +169,9 @@ function App() {
     <div className="App">
       <div className="side">
         <Menu change={change}/>
-        <SideBar option={option} save={save} favs={saved} setCurrent={currentWeather}/>
+        <SideBar option={option} save={save} now={now} favs={saved} setCurrent={currentWeather}/>
       </div>
-      <MainScreen save={save} favs={saved} current={current} weather={weather}/>
+      <MainScreen save={save} favs={saved} current={current} weather={weather} now={now}/>
     </div>
   );
 }

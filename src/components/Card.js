@@ -1,30 +1,56 @@
 import '../css/card.css'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 import faved from '../assets/filled-star.png'
 
-const Card = ({city, save}) => {
+const Card = ({city, save, set}) => {
+    
+    const [weather, setWeather] = useState({
+        data:[{
+            weather:{}
+        }]
+    })
 
-    //store entire api info here
+    useEffect(()=>{
 
-    //display from api
-    //city name
-    //temp
-    //weather icon
-
-    //function to change state in main screen
+        let options = {
+            method: 'GET',
+            url: 'https://weatherbit-v1-mashape.p.rapidapi.com/current',
+            params: {lat: `${city.lat}`, lon: `${city.lon}`},
+            headers: {
+              'x-rapidapi-host': 'weatherbit-v1-mashape.p.rapidapi.com',
+              'x-rapidapi-key': process.env.REACT_APP_API_KEY
+            }
+        };
+      
+        axios.request(options).then(function (response) {
+        console.log(response.data)
+        setWeather(response.data);
+        }).catch(function (error) {
+        console.error(error);
+        });
+    }, [])
+    
+       
 
     return (
-        <div className="Card" onClick={()=>{console.log("Changing current display")}}>
-            <div className="card-image"></div>
+        <div className="Card" onClick={()=>{set(city)}}>
+            <div className="card-image">
+                <img src={process.env.PUBLIC_URL + `/cities/${city.city_name}.jpg`}/>
+            </div>
             <div className="fav" onClick={()=>{
                 save(city)
             }}> <img src={faved}/></div>
             <div className="card-info">
                 <p>{city.city_name.toUpperCase()}</p>
                 <div className="card-temp">
-                    <span className="card-num">-4</span><span className="card-degree"></span>
+                    <span className="card-num">{weather.data[0].temp || "- -"}</span><span className="card-degree"></span>
                 </div>
-                <img src=""/>
+                {Object.keys(weather.data[0].weather).length !== 0 ?
+                    <img className="weather-icon" src={process.env.PUBLIC_URL+ `/icons/${weather.data[0].weather.icon}.png`}/> :
+                    <img className="weather-icon" src=""/>
+                }
             </div>
         </div>
     )

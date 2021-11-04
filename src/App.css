@@ -2,9 +2,9 @@
     width:100%;
     height:100vh;
     display:flex;
-    background:url('./assets/daniel-leone-g30P1zcOzXo-unsplash\ \(1\).jpg');
+    background:url('./assets/roberto-nickson-b1ovoL_F1S8-unsplash.jpg');
     background-size: cover;
-    background-position: bottom;
+    background-position: center;
     font-family: 'product sans';
     overflow-y: hidden;
 }
