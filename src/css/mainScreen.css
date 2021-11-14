@@ -5,6 +5,8 @@
     flex-direction: column;
     color:white;
     justify-content: space-between;
+    max-width:1920px;
+    margin: 0 auto 0 auto
 }
 .current{
     width:80%;
@@ -147,4 +149,47 @@
 }
 .meta-item:hover::after, .meta-item:hover::before{
     visibility: visible;
+}
+
+
+@media (max-width:1200px){
+    .Main{
+        width:70%;
+    }
+    .current-city{
+        font-size:50px;
+    }
+    .code{
+        font-size:30px;
+    }
+    .weather-icon{
+        width:100px;
+        height:100px;
+    }
+    .weather-description{
+        font-size:20px;
+    }
+    .cur-num{
+        font-size:50px;
+    }
+    .cur-degree{
+        width:10px;
+        height:10px;
+    }
+    .app-num{
+        font-size:25px;
+    }
+    .app-degree{
+        width:8px;
+        height:8px;
+    }
+}
+
+
+@media (max-width:800px){
+    .Main{
+        width:100%;
+        height:93vh;
+        margin-top:7vh;
+    }
 }

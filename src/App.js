@@ -159,7 +159,7 @@ function App() {
 
   }
 
-  const isMobile = useMediaQuery({query: '(max-width: 760px'});
+  const isMobile = useMediaQuery({query: '(max-width: 800px'});
 
   useEffect(()=>{
     console.log(isMobile);
@@ -168,7 +168,7 @@ function App() {
   return (
     <div className="App">
       <div className="side">
-        <Menu change={change}/>
+        <Menu current={option} mobile={isMobile} change={change}/>
         <SideBar option={option} save={save} now={now} favs={saved} setCurrent={currentWeather}/>
       </div>
       <MainScreen save={save} favs={saved} current={current} weather={weather} now={now}/>

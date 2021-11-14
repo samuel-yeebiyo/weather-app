@@ -12,3 +12,21 @@
     width:22%;
     height:100%;
 }
+
+@media (max-width:1200px){
+    .side{
+        width:30%;
+    }
+}
+
+@media (max-width:800px){
+    .App{
+        flex-direction:column;
+        overflow-y:visible;
+    }
+    .side{
+        width:100%;
+        position:absolute;
+        border:1px solid red;
+    }
+}
