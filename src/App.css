@@ -27,6 +27,11 @@
     .side{
         width:100%;
         position:absolute;
-        border:1px solid red;
+        height:auto;
+    }
+}
+@media (max-width: 600px){
+    .App{
+        width:100vw;
     }
 }

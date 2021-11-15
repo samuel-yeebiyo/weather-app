@@ -6,7 +6,8 @@
     color:white;
     justify-content: space-between;
     max-width:1920px;
-    margin: 0 auto 0 auto
+    margin: 0 auto 0 auto;
+    overflow-y: scroll;
 }
 .current{
     width:80%;
@@ -15,6 +16,7 @@
     flex-direction: column;
     align-items: center;
     margin-top:50px;
+    margin-bottom:30px;
 }
 .location{
     margin-bottom:10px;
@@ -22,11 +24,11 @@
     align-items: center;
 }
 .current-city{
-    font-size:70px;
+    font-size:50px;
     margin-right:10px;
 }
 .code{
-    font-size:50px;
+    font-size:30px;
     align-self: flex-end;
 }
 .current-star img{
@@ -39,14 +41,14 @@
     margin-bottom:10px;
 }
 .weather-description{
-    font-size:25px;
+    font-size:21px;
     margin-bottom:20px;
 }
 .current-temp{
     position:relative;
 }
 .cur-num{
-    font-size:100px;
+    font-size:80px;
 }
 .cur-degree{
     height:20px;
@@ -61,7 +63,7 @@
     margin-bottom:35px;
 }
 .app-num{
-    font-size:50px;
+    font-size:30px;
 }
 .app-degree{
     height:16px;
@@ -175,6 +177,7 @@
     .cur-degree{
         width:10px;
         height:10px;
+
     }
     .app-num{
         font-size:25px;
@@ -192,4 +195,45 @@
         height:93vh;
         margin-top:7vh;
     }
+}
+
+@media (max-width: 600px){
+    .Main{
+        width:100vw;
+    }
+    .current-star{
+        height:auto;
+    }
+    .current-star img{
+        margin-top:10px;
+        max-height:30px;
+    }
+    .meta{
+        width:100%;
+        justify-content: space-around;
+    }
+    .meta-item{
+        width:100px;
+    }
+    .meta-item img{
+        height:20px;
+        margin-bottom:15px;
+    }
+    .meta-item p{
+        font-size:12px;
+    }
+    .current-city{
+        font-size:25px;
+    }
+    .code{
+        font-size:15px;
+    }
+    .weather-icon{
+        width:100px;
+        height:100px;
+    }
+    .weather-description{
+        font-size:20px;
+    }
+    
 }

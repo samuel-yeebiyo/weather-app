@@ -8,7 +8,7 @@ const Menu = ({current, mobile, change}) => {
                     change(1)
                     if(mobile && current == 1){
                         window.document.querySelector(".SideBar").classList.toggle("showing")
-                    }else{
+                    }else if(mobile){
                         window.document.querySelector(".SideBar").classList.add("showing")
                     }
                 }}>Saved</p>
@@ -19,7 +19,7 @@ const Menu = ({current, mobile, change}) => {
                     change(0)
                     if(mobile && current == 0){
                         window.document.querySelector(".SideBar").classList.toggle("showing")
-                    }else{
+                    }else if(mobile){
                         window.document.querySelector(".SideBar").classList.add("showing")
                     }
                 }}>Search</p>

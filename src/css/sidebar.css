@@ -8,6 +8,8 @@
 }
 .showing{
   top:7vh !important;
+  background:rgba(0,0,0,0.8);
+
 }
 
 /* width */
