@@ -4,7 +4,7 @@ import axios from 'axios'
 
 import faved from '../assets/filled-star.png'
 
-const Card = ({city, save, set}) => {
+const Card = ({ mobile, city, save, set}) => {
     
     const [weather, setWeather] = useState({
         data:[{
@@ -35,11 +35,18 @@ const Card = ({city, save, set}) => {
        
 
     return (
-        <div className="Card" onClick={()=>{set(city)}}>
+        <div className="Card" onClick={(e)=>{
+            e.stopPropagation()
+            set(city)
+            if(mobile){
+                window.document.querySelector(".SideBar").classList.remove("showing")
+            }
+        }}>
             <div className="card-image">
                 <img src={process.env.PUBLIC_URL + `/cities/${city.city_name}.jpg`}/>
             </div>
-            <div className="fav" onClick={()=>{
+            <div className="fav" onClick={(e)=>{
+                e.stopPropagation()
                 save(city)
             }}> <img src={faved}/></div>
             <div className="card-info">

@@ -5,7 +5,7 @@ import Item from "./Item"
 
 import '../css/results.css'
 
-const Results = ({favs, save, set, searching, count}) => {
+const Results = ({favs, save, set, mobile, searching, count}) => {
 
     const [results, setResults] = useState([])
 
@@ -35,7 +35,7 @@ const Results = ({favs, save, set, searching, count}) => {
         <div className="Results">
             {
                 results.map((item)=>(
-                    <Item save={save} city={item} favs={favs} set={set}/>
+                    <Item save={save} mobile={mobile} city={item} favs={favs} set={set}/>
                 ))
             }
         </div>

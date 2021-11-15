@@ -169,7 +169,7 @@ function App() {
     <div className="App">
       <div className="side">
         <Menu current={option} mobile={isMobile} change={change}/>
-        <SideBar option={option} save={save} now={now} favs={saved} setCurrent={currentWeather}/>
+        <SideBar option={option} save={save} now={now} favs={saved} mobile={isMobile} setCurrent={currentWeather}/>
       </div>
       <MainScreen save={save} favs={saved} current={current} weather={weather} now={now}/>
     </div>

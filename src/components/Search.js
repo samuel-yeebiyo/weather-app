@@ -3,7 +3,7 @@ import '../css/search.css'
 import icon from '../assets/search.png'
 import Results from './Results'
 
-const Search = ({save, favs, setCurrent}) => {
+const Search = ({save, favs, mobile, setCurrent}) => {
 
     const [search, setSearch] = useState('')
 
@@ -13,7 +13,7 @@ const Search = ({save, favs, setCurrent}) => {
                 <img src={icon} />
                 <input value={search} onChange={(e)=>{setSearch(e.target.value)}} type="text" placeholder="City Name" className="input"></input>
             </div>
-            <Results favs={favs} save={save} set={setCurrent} searching={search} count={10}/>         
+            <Results mobile={mobile} favs={favs} save={save} set={setCurrent} searching={search} count={10}/>         
         </div>
     )
 }
