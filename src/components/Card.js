@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 import faved from '../assets/filled-star.png'
+import favPicture from'../assets/tim-swaan-eOpewngf68w-unsplash.jpg'
 
 const Card = ({ mobile, city, save, set}) => {
     
@@ -43,7 +44,7 @@ const Card = ({ mobile, city, save, set}) => {
             }
         }}>
             <div className="card-image">
-                <img src={process.env.PUBLIC_URL + `/cities/${city.city_name}.jpg`}/>
+                <img src={favPicture}/>
             </div>
             <div className="fav" onClick={(e)=>{
                 e.stopPropagation()
