@@ -9,7 +9,6 @@ import {useMediaQuery} from 'react-responsive'
 import MainScreen from './components/MainScreen'
 import SideBar from './components/SideBar'
 import Menu from './components/Menu'
-import {cities} from './data/cities'
 
 function App() {
 
@@ -33,7 +32,6 @@ function App() {
   })
 
   useEffect(()=>{
-    console.log(cities.length)
 
     navigator.geolocation.getCurrentPosition((position)=>{
 
@@ -51,17 +49,25 @@ function App() {
       };
 
 
-      axios.request(options).then(function (response) {
-        let fetched = response.data;
+      axios.request(options).then(async function (response) {
+        let fetched = await response.data;
         console.log(fetched)
         setWeather(response.data);
 
-        for(let i=0; i<cities.length ; i++){
-          if(fetched.city_name == cities[i].city_name && fetched.state_code == cities[i].state_code){
-            setCurrent(cities[i]);
-            break;
+        let sub_option = {
+          method: 'POST',
+          url: 'https://shrouded-escarpment-48686.herokuapp.com/search',
+          data: {city: `${JSON.stringify(fetched)}`},
+          headers:{
+            'Content-Type':'application/json',
           }
-        }
+        };
+
+        axios.request(sub_option).then(function(response){
+
+          console.log("Got city")
+          setCurrent(response.data)
+        })
 
       }).catch(function (error) {
         console.error(error);
@@ -161,9 +167,6 @@ function App() {
 
   const isMobile = useMediaQuery({query: '(max-width: 800px'});
 
-  useEffect(()=>{
-    console.log(isMobile);
-  })
 
   return (
     <div className="App">

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
-import {cities} from '../data/cities'
 import Item from "./Item"
+import axios from 'axios'
 
 import '../css/results.css'
 
@@ -9,23 +9,26 @@ const Results = ({favs, save, set, mobile, searching, count}) => {
 
     const [results, setResults] = useState([])
 
-    function parameter (value){
-        let city = value.city_name.toLowerCase()
-        let key = searching.toLowerCase()
-
-        return city.includes(key);
-    }
-
     useEffect(()=>{
         console.log(results[0])
         if(searching.length > 2){
-            let copy = [...cities]
-            let filtered = copy.filter(parameter)
-            if(filtered.length > count){
-                filtered = filtered.slice(0, count);
-            }
+            
+            let sub_option = {
+                method: 'POST',
+                url: 'https://shrouded-escarpment-48686.herokuapp.com/searching',
+                data: {query: `${searching}`, count: count},
+                headers:{
+                  'Content-Type':'application/json',
+                }
+            };
+      
+            axios.request(sub_option).then(function(response){
+    
+                console.log("Got city")
+                setResults(response.data)
+            
+            })
 
-            setResults(filtered);   
         }else{
             setResults([])
         }
